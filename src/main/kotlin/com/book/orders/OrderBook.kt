@@ -13,4 +13,8 @@ class OrderBook {
   fun remove(orderId: Long) {
     orders.removeAll { it.id == orderId }
   }
+
+  fun update(orderId: Int, size: Int) {
+    TODO("Not yet implemented")
+  }
 }
