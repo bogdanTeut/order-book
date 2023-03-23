@@ -14,7 +14,13 @@ class OrderBook {
     orders.removeAll { it.id == orderId }
   }
 
-  fun update(orderId: Int, size: Int) {
-    TODO("Not yet implemented")
+  fun update(orderId: Long, size: Long) {
+    val existingOrder = orders.find { it.id == orderId }
+    val newOrder = existingOrder?.copy(size = size)
+
+    newOrder?.let {
+      remove(orderId)
+      add(newOrder)
+    }
   }
 }
