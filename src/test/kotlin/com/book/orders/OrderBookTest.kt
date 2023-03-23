@@ -17,15 +17,3 @@ class OrderBookTest {
     assertThat(orderBook.fetchAll()).contains(Order(1, 30.0, 'B', 10))
   }
 }
-
-data class Order(val id: Long, val price: Double, val side: Char, val size: Long)
-
-class OrderBook {
-  fun add(order: Order) {
-    TODO("Not yet implemented")
-  }
-
-  fun fetchAll(): List<Order>? {
-    TODO("Not yet implemented")
-  }
-}
