@@ -10,7 +10,7 @@ class OrderBook {
   }
 
   fun fetchAll(): List<Order> = orders
-  fun remove(order: Order) {
+  fun remove(id: Long) {
     TODO("Not yet implemented")
   }
 }

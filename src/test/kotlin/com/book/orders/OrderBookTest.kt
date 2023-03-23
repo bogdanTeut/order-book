@@ -24,7 +24,7 @@ class OrderBookTest {
     orderBook.add(Order(1, 30.0, 'B', 10))
 
     //when
-    orderBook.remove(Order(1, 30.0, 'B', 10))
+    orderBook.remove(1)
 
     //then
     assertThat(orderBook.fetchAll()).isEmpty()
