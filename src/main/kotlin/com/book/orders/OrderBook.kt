@@ -4,9 +4,16 @@ import java.time.LocalDateTime
 import kotlin.collections.Map.Entry
 
 data class Order(val id: Long, val price: Double, val side: Char, val size: Long)
+
 data class TimedOrder(val order: Order, val time: LocalDateTime)
 
 data class PriceLevel(val price: Double, val orders: List<TimedOrder>)
+
+private val TimedOrder.price
+  get() = order.price
+
+private val TimedOrder.size
+  get() = order.size
 
 class OrderBook {
   private val ordersMap = mutableMapOf<Long, TimedOrder>()
@@ -15,7 +22,6 @@ class OrderBook {
     ordersMap[order.id] = TimedOrder(order, LocalDateTime.now())
   }
 
-  fun fetchAll(): List<Order> = ordersMap.values.map { it.order }.toList()
   fun remove(orderId: Long) {
     ordersMap.remove(orderId)
   }
@@ -32,8 +38,8 @@ class OrderBook {
     val (bids, offers) = ordersMap.values
       .partition { it.order.side == 'B' }
 
-    val bidsByPriceMap = bids.groupBy { it.price() }
-    val offersByPriceMap = offers.groupBy { it.price() }
+    val bidsByPriceMap = bids.groupBy { it.price }
+    val offersByPriceMap = offers.groupBy { it.price }
 
     return if (side == 'B') bidsByPriceMap.entries.sortedByDescending { it.key }.map(mapperToPriceLevel)
     else offersByPriceMap.entries.sortedBy { it.key }.map(mapperToPriceLevel)
@@ -52,7 +58,7 @@ class OrderBook {
 
     val priceLevels = sortedByPriceLevels(side)
 
-    return priceLevels.getOrNull(level-1)?.orders?.sumOf { it.size() }
+    return priceLevels.getOrNull(level-1)?.orders?.sumOf { it.size }
   }
 
   fun orders(side: Char): List<Order> {
@@ -63,6 +69,5 @@ class OrderBook {
     }
   }
 
-  private fun TimedOrder.price() = order.price
-  private fun TimedOrder.size() = order.size
+  internal fun fetchAll(): List<Order> = ordersMap.values.map { it.order }.toList()
 }
