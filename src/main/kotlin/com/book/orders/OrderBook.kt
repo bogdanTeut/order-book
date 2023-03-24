@@ -19,6 +19,8 @@ class OrderBook {
   }
 
   fun price(side: Char, level: Int): Double {
-    TODO("Not yet implemented")
+    return ordersMap.values
+      .filter { it.side == side }
+      .sortedByDescending { it.price }[level-1].price
   }
 }

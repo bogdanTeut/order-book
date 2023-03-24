@@ -48,12 +48,15 @@ class OrderBookTest {
     //given
     val orderBook = OrderBook()
     orderBook.add(Order(1, 30.0, 'B', 15))
-    orderBook.add(Order(1, 10.0, 'B', 10))
-    orderBook.add(Order(1, 40.0, 'B', 20))
+    orderBook.add(Order(2, 10.0, 'B', 10))
+    orderBook.add(Order(3, 40.0, 'B', 20))
+    orderBook.add(Order(4, 5.0, 'B', 50))
+    orderBook.add(Order(5, 25.0, 'B', 10))
 
     //when
     val price = orderBook.price('B', 2)
 
-    assertThat(price).isEqualTo(10);
+    //then
+    assertThat(price).isEqualTo(30);
   }
 }
