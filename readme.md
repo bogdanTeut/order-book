@@ -10,6 +10,7 @@ Considerations:
 
 * Took the liberty(there was no mention in the spec) to return a null when the desired price level was not found (there are better ways to do it).  
 
+* Package name should've contained mizuho but it is public repo :) 
 
 
 * In order to see test report you can run jacoco plugin from intellij or from command line: ./gradlew clean test
