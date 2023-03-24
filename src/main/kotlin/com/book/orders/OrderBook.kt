@@ -30,4 +30,8 @@ class OrderBook {
    return if (side == 'B') bidsByPriceMap.keys.sortedDescending().getOrNull(level-1)
    else offersByPriceMap.keys.sorted().getOrNull(level-1)
   }
+
+  fun totalSize(side: Char, level: Int): Int {
+    TODO("Not yet implemented")
+  }
 }

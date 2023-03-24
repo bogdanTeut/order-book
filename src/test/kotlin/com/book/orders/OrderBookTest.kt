@@ -141,4 +141,24 @@ class OrderBookTest {
     assertThat(orderBook.price('B', 2)).isEqualTo(30)
     assertThat(orderBook.price('O', 1)).isEqualTo(12)
   }
+
+  @Test
+  fun `given side 'B' and level 2 it provides correct total size`() {
+    //given
+    val orderBook = OrderBook()
+    orderBook.add(Order(1, 30.0, 'B', 15))
+    orderBook.add(Order(2, 10.0, 'B', 30))
+    orderBook.add(Order(3, 25.0, 'O', 10))
+    orderBook.add(Order(4, 40.0, 'B', 20))
+    orderBook.add(Order(5, 30.0, 'B', 50))
+    orderBook.add(Order(6, 12.0, 'O', 50))
+    orderBook.add(Order(7, 25.0, 'B', 25))
+    orderBook.add(Order(8, 20.0, 'O', 10))
+
+    //when
+    val price = orderBook.totalSize('B', 2)
+
+    //then
+    assertThat(price).isEqualTo(65);
+  }
 }
