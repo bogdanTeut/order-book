@@ -44,7 +44,7 @@ class OrderBookTest {
   }
 
   @Test
-  fun `given side and level it provides correct price`() {
+  fun `given side 'B' and level 2 it provides correct 2nd best bid price`() {
     //given
     val orderBook = OrderBook()
     orderBook.add(Order(1, 30.0, 'B', 15))
@@ -58,5 +58,22 @@ class OrderBookTest {
 
     //then
     assertThat(price).isEqualTo(30);
+  }
+
+  @Test
+  fun `given side 'O' and level 2 it provides correct 2nd best offer price`() {
+    //given
+    val orderBook = OrderBook()
+    orderBook.add(Order(1, 30.0, 'O', 15))
+    orderBook.add(Order(2, 10.0, 'O', 10))
+    orderBook.add(Order(3, 40.0, 'O', 20))
+    orderBook.add(Order(4, 5.0, 'O', 50))
+    orderBook.add(Order(5, 25.0, 'O', 10))
+
+    //when
+    val price = orderBook.price('B', 2)
+
+    //then
+    assertThat(price).isEqualTo(10);
   }
 }
