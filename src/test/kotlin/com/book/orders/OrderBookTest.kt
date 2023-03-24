@@ -1,6 +1,7 @@
 package com.book.orders
 
 import com.google.common.truth.Truth.assertThat
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class OrderBookTest {
@@ -109,5 +110,17 @@ class OrderBookTest {
 
     //then
     assertThat(price).isNull()
+  }
+
+  @Test
+  fun `given side and negative level it throws illegal argument exception`() {
+    //given
+    val orderBook = OrderBook()
+
+    //when
+    val exception = Assertions.assertThrows(IllegalAccessException::class.java) { orderBook.price('B', -1) }
+
+    //then
+    assertThat(exception).hasMessageThat().isEqualTo("Level must be positive value.")
   }
 }
