@@ -19,8 +19,13 @@ class OrderBook {
   }
 
   fun price(side: Char, level: Int): Double {
-    return ordersMap.values
-      .filter { it.side == side }
-      .sortedByDescending { it.price }[level-1].price
+    val (bids, offers) = ordersMap.values
+      .partition { it.side == 'B' }
+
+    val sortedBids = bids.groupBy { it.price }
+    val sortedOffers = offers.groupBy { it.price }
+
+   return if (side == 'B') sortedBids.keys.sortedDescending()[level-1]
+   else sortedOffers.keys.sorted()[level-1]
   }
 }
