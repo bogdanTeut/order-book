@@ -18,14 +18,14 @@ class OrderBook {
     ordersMap.computeIfPresent(orderId) { _, order -> order.copy(size = size) }
   }
 
-  fun price(side: Char, level: Int): Double {
+  fun price(side: Char, level: Int): Double? {
     val (bids, offers) = ordersMap.values
       .partition { it.side == 'B' }
 
     val bidsByPriceMap = bids.groupBy { it.price }
     val offersByPriceMap = offers.groupBy { it.price }
 
-   return if (side == 'B') bidsByPriceMap.keys.sortedDescending()[level-1]
-   else offersByPriceMap.keys.sorted()[level-1]
+   return if (side == 'B') bidsByPriceMap.keys.sortedDescending().getOrNull(level-1)
+   else offersByPriceMap.keys.sorted().getOrNull(level-1)
   }
 }
