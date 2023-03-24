@@ -1,6 +1,7 @@
 plugins {
   kotlin("jvm") version "1.8.10"
   idea
+  jacoco
 }
 
 repositories {
@@ -18,4 +19,16 @@ tasks {
   test {
     useJUnitPlatform()
   }
+}
+
+jacoco {
+  toolVersion = "0.8.8"
+  reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
+}
+
+tasks.test {
+  finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+  dependsOn(tasks.test) // tests are required to run before generating the report
 }
