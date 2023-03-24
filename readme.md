@@ -23,16 +23,16 @@ Considerations:
     * Overall implementation can be improved tremendously. 
   Instead of generating the price levels map on each method call(price, totalSize, orders) and make use of the data which is time-consuming and slow,
   we could've used a tree like structure with *side* as main partition key followed by *price* levels keys associated with buckets of Orders.
-  E.g.
-    Bid ->
-        50 -> 
-            Order: 1 B 50 10 
-            Order: 2 B 50 10 t + 1 sec
-            Order: 3 B 50 15 t + 2 sec
-        30 -> 
-            Order: 4 B 30 25
-            Order: 5 B 30 15 t + 2 sec
-            ........
-    Offer ->
-        10 ->
-            Order: 6 O 10 10 
+  E.g. 
+    - Bid ->
+        - 50 ->
+            - Order: 1 B 50 10
+            - Order: 2 B 50 10 t + 1 sec
+            - Order: 3 B 50 15 t + 2 sec
+        - 30 ->
+            - Order: 4 B 30 25 
+            - Order: 5 B 30 15 t + 2 sec
+           -  ........ 
+    - Offer -> 
+        - 10 -> 
+            - Order: 6 O 10 10 
