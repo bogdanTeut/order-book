@@ -1,5 +1,7 @@
 Considerations:
 
+* I believe there is no 'refactoring done', or no 'done' in general.
+
 * I used TDD and tried to be disciplined about doing teeny tiny steps, which is visible if you take a look at git log.
 
 * I choose a simple implementation thinking a more complex one wasn't in the scope of this exercise.
@@ -20,10 +22,10 @@ Considerations:
 * Part B:
     * side -> should be an Enum Bid and Offer.
     * We should use BigDecimals and BigIntegers.
-    * Overall implementation can be improved tremendously. 
-  Instead of generating the price levels map on each method call(price, totalSize, orders) and make use of the data which is time-consuming(considering high volume of data),
-  we could've used a tree like structure with *side* as main partition key followed by *price* levels keys associated with buckets of Orders.
-  E.g. 
+    * There are better(real life, latency sensitive) solutions.
+  For example, instead of generating the price levels map on each method call(price, totalSize, orders) and make use of the data which is time-consuming(considering high volume of data),
+  we could've implemented a tree like structure(similar to nested maps) with *side* as main partition key followed by *price* levels keys associated with buckets of Orders, 
+  which would have speed up read operations. E.g. 
     - Bid ->
         - 50 ->
             - Order: 1 B 50 10
@@ -36,3 +38,7 @@ Considerations:
     - Offer -> 
         - 10 -> 
             - Order: 6 O 10 10 
+
+          
+
+    
