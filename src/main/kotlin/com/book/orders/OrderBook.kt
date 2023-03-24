@@ -19,6 +19,8 @@ class OrderBook {
   }
 
   fun price(side: Char, level: Int): Double? {
+    require(level > 0) { "Level must be positive value." }
+
     val (bids, offers) = ordersMap.values
       .partition { it.side == 'B' }
 

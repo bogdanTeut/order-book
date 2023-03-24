@@ -118,7 +118,7 @@ class OrderBookTest {
     val orderBook = OrderBook()
 
     //when
-    val exception = Assertions.assertThrows(IllegalAccessException::class.java) { orderBook.price('B', -1) }
+    val exception = Assertions.assertThrows(IllegalArgumentException::class.java) { orderBook.price('B', -1) }
 
     //then
     assertThat(exception).hasMessageThat().isEqualTo("Level must be positive value.")
