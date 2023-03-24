@@ -123,4 +123,22 @@ class OrderBookTest {
     //then
     assertThat(exception).hasMessageThat().isEqualTo("Level must be positive value.")
   }
+
+  @Test
+  fun `given bids plus offers and level 2 it provides correct 2nd best prices for both bids and offers`() {
+    //given
+    val orderBook = OrderBook()
+    orderBook.add(Order(1, 30.0, 'B', 15))
+    orderBook.add(Order(2, 10.0, 'B', 30))
+    orderBook.add(Order(3, 25.0, 'O', 10))
+    orderBook.add(Order(4, 40.0, 'B', 20))
+    orderBook.add(Order(5, 5.0, 'B', 50))
+    orderBook.add(Order(6, 12.0, 'O', 50))
+    orderBook.add(Order(7, 25.0, 'B', 25))
+    orderBook.add(Order(8, 20.0, 'O', 10))
+
+    //when then
+    assertThat(orderBook.price('B', 2)).isEqualTo(30)
+    assertThat(orderBook.price('O', 1)).isEqualTo(12)
+  }
 }
