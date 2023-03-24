@@ -93,4 +93,21 @@ class OrderBookTest {
     //then
     assertThat(price).isNull()
   }
+
+  @Test
+  fun `given side 'B' and level that exceeds price levels provides null price`() {
+    //given
+    val orderBook = OrderBook()
+    orderBook.add(Order(1, 30.0, 'B', 15))
+    orderBook.add(Order(2, 10.0, 'B', 10))
+    orderBook.add(Order(3, 40.0, 'B', 20))
+    orderBook.add(Order(4, 5.0, 'B', 50))
+    orderBook.add(Order(5, 25.0, 'B', 10))
+
+    //when
+    val price = orderBook.price('B', 8)
+
+    //then
+    assertThat(price).isNull()
+  }
 }
