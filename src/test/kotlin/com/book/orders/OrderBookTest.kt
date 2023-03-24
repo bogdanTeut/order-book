@@ -71,7 +71,7 @@ class OrderBookTest {
     orderBook.add(Order(5, 25.0, 'O', 10))
 
     //when
-    val price = orderBook.price('B', 2)
+    val price = orderBook.price('O', 2)
 
     //then
     assertThat(price).isEqualTo(10);
