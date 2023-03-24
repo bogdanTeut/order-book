@@ -76,4 +76,21 @@ class OrderBookTest {
     //then
     assertThat(price).isEqualTo(10);
   }
+
+  @Test
+  fun `given side 'B' and no bids provides null price`() {
+    //given
+    val orderBook = OrderBook()
+    orderBook.add(Order(1, 30.0, 'O', 15))
+    orderBook.add(Order(2, 10.0, 'O', 10))
+    orderBook.add(Order(3, 40.0, 'O', 20))
+    orderBook.add(Order(4, 5.0, 'O', 50))
+    orderBook.add(Order(5, 25.0, 'O', 10))
+
+    //when
+    val price = orderBook.price('B', 2)
+
+    //then
+    assertThat(price).isNull()
+  }
 }

@@ -22,10 +22,10 @@ class OrderBook {
     val (bids, offers) = ordersMap.values
       .partition { it.side == 'B' }
 
-    val sortedBids = bids.groupBy { it.price }
-    val sortedOffers = offers.groupBy { it.price }
+    val bidsByPriceMap = bids.groupBy { it.price }
+    val offersByPriceMap = offers.groupBy { it.price }
 
-   return if (side == 'B') sortedBids.keys.sortedDescending()[level-1]
-   else sortedOffers.keys.sorted()[level-1]
+   return if (side == 'B') bidsByPriceMap.keys.sortedDescending()[level-1]
+   else offersByPriceMap.keys.sorted()[level-1]
   }
 }
