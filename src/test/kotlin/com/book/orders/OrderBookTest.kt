@@ -31,7 +31,7 @@ class OrderBookTest {
   }
 
   @Test
-  fun `updates order size using order id`() {
+  fun `update order size using order id`() {
     //given
     val orderBook = OrderBook()
     orderBook.add(Order(1, 30.0, 'B', 10))
@@ -41,5 +41,19 @@ class OrderBookTest {
 
     //then
     assertThat(orderBook.fetchAll()).contains(Order(1, 30.0, 'B', 20))
+  }
+
+  @Test
+  fun `given side and level it provides correct price`() {
+    //given
+    val orderBook = OrderBook()
+    orderBook.add(Order(1, 30.0, 'B', 15))
+    orderBook.add(Order(1, 10.0, 'B', 10))
+    orderBook.add(Order(1, 40.0, 'B', 20))
+
+    //when
+    val price = orderBook.price('B', 2)
+
+    assertThat(price).isEqualTo(10);
   }
 }

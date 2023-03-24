@@ -16,6 +16,9 @@ class OrderBook {
 
   fun update(orderId: Long, size: Long) {
     ordersMap.computeIfPresent(orderId) { _, order -> order.copy(size = size) }
+  }
 
+  fun price(side: Char, level: Int): Double {
+    TODO("Not yet implemented")
   }
 }
