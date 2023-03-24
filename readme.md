@@ -21,7 +21,7 @@ Considerations:
     * side -> should be an Enum Bid and Offer.
     * We should use BigDecimals and BigIntegers.
     * Overall implementation can be improved tremendously. 
-  Instead of generating the price levels map on each method call(price, totalSize, orders) and make use of the data which is time-consuming and slow,
+  Instead of generating the price levels map on each method call(price, totalSize, orders) and make use of the data which is time-consuming(considering high volume of data),
   we could've used a tree like structure with *side* as main partition key followed by *price* levels keys associated with buckets of Orders.
   E.g. 
     - Bid ->
