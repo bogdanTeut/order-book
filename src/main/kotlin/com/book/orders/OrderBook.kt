@@ -50,4 +50,8 @@ class OrderBook {
 
     return levels.getOrNull(level-1)?.orders?.sumOf { it.size }
   }
+
+  fun orders(side: Char): List<Order> {
+    TODO("Not yet implemented")
+  }
 }

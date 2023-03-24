@@ -161,4 +161,31 @@ class OrderBookTest {
     //then
     assertThat(price).isEqualTo(65);
   }
+
+  @Test
+  fun `given side 'B' provides all orders sorted correctly in level and time order`() {
+    //given
+    val orderBook = OrderBook()
+    orderBook.add(Order(1, 30.0, 'B', 15))
+    orderBook.add(Order(2, 10.0, 'B', 30))
+    orderBook.add(Order(3, 25.0, 'O', 10))
+    orderBook.add(Order(4, 40.0, 'B', 20))
+    orderBook.add(Order(5, 30.0, 'B', 50))
+    orderBook.add(Order(6, 12.0, 'O', 50))
+    orderBook.add(Order(7, 10.0, 'B', 25))
+    orderBook.add(Order(8, 20.0, 'O', 10))
+
+    //when
+    val orders = orderBook.orders('B')
+
+    //then
+    assertThat(orders)
+      .containsExactlyElementsIn(listOf(
+        Order(4, 40.0, 'B', 20),
+        Order(1, 30.0, 'B', 15),
+        Order(5, 30.0, 'B', 50),
+        Order(2, 10.0, 'B', 30),
+        Order(7, 10.0, 'B', 25)
+      )).inOrder();
+  }
 }
